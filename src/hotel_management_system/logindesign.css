@@ -1,0 +1,18 @@
+.white-bg{
+    -fx-background-color: #fff;
+}
+.left-form {
+    -fx-background-color: linear-gradient(to bottom right, #2f3f89, #9231b5);
+}
+.textfie {
+    -fx-background-color: transparent;
+    -fx-border-color: #3395f1;
+    -fx-border-width: 0px 0px .8px 0px;
+    -fx-font-size: 13px;
+    -fx-font-family:"Tahoma";
+}
+
+.textfie:focused {
+    -fx-border-color: linear-gradient(to bottom right, #2f3f89, #923165);
+    -fx-border-width: 0px 0px 1.5px 0px;
+}
