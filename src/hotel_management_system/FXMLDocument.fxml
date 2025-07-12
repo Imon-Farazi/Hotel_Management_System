@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
@@ -10,26 +10,32 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hotel_management_system.FXMLDocumentController">
+<StackPane fx:id="stackform" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hotel_management_system.FXMLDocumentController">
    <children>
-      <AnchorPane prefHeight="200.0" prefWidth="200.0">
+      <AnchorPane fx:id="mainform" prefHeight="200.0" prefWidth="200.0">
          <children>
             <AnchorPane prefHeight="400.0" prefWidth="300.0" style="-fx-background-color: ;" styleClass="left-form" stylesheets="@logindesign.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="300.0" AnchorPane.topAnchor="0.0">
                <children>
-                  <FontAwesomeIconView glyphName="BUILDING" layoutX="99.0" layoutY="202.0" size="10em" text="" />
-                  <Text layoutX="139.0" layoutY="252.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Hotel Management System" />
+                  <Text fill="WHITE" layoutX="53.0" layoutY="195.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Hotel Management System" textAlignment="CENTER" wrappingWidth="193.55633544921875">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </Text>
                </children></AnchorPane>
             <AnchorPane layoutX="300.0" prefHeight="405.0" prefWidth="301.0" stylesheets="@logindesign.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="300.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <children>
-                  <Label layoutX="111.0" layoutY="116.0" text="Log In" textFill="#1c285c">
+                  <Label layoutX="117.0" layoutY="119.0" text="Log In" textFill="#1c285c">
                      <font>
                         <Font name="Segoe UI Black" size="24.0" />
                      </font>
                   </Label>
-                  <TextField layoutX="54.0" layoutY="174.0" prefHeight="25.0" prefWidth="200.0" promptText="User Name" />
-                  <PasswordField layoutX="54.0" layoutY="219.0" prefWidth="200.0" promptText="Password" />
-                  <Button layoutX="123.0" layoutY="269.0" mnemonicParsing="false" text="Log In" />
-                  <FontAwesomeIconView fill="#1c285c" glyphName="USER" layoutX="126.0" layoutY="100.0" size="5em" tabSize="5" />
+                  <TextField fx:id="username" alignment="CENTER" layoutX="54.0" layoutY="167.0" prefHeight="25.0" prefWidth="200.0" promptText="User Name" styleClass="textfie" stylesheets="@logindesign.css" AnchorPane.leftAnchor="54.0" AnchorPane.rightAnchor="46.0" />
+                  <PasswordField fx:id="password" alignment="CENTER" layoutX="54.0" layoutY="216.0" prefWidth="200.0" promptText="Password" styleClass="textfie" stylesheets="@logindesign.css" AnchorPane.leftAnchor="54.0" AnchorPane.rightAnchor="46.0" />
+                  <Button fx:id="loginbtn" layoutX="122.0" layoutY="265.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="65.0" styleClass="login-btn" stylesheets="@logindesign.css" text="Log In" AnchorPane.bottomAnchor="100.0" AnchorPane.leftAnchor="122.0" AnchorPane.rightAnchor="113.0" AnchorPane.topAnchor="265.0">
+                     <font>
+                        <Font name="System Bold" size="11.0" />
+                     </font></Button>
+                  <Button fx:id="close" layoutX="254.0" layoutY="1.0" mnemonicParsing="false" onAction="#exit" prefHeight="25.0" prefWidth="43.0" styleClass="close" stylesheets="@logindesign.css" text="X" AnchorPane.rightAnchor="2.6666666666666856" AnchorPane.topAnchor="1.0" />
                   <FontAwesomeIconView />
                </children>
             </AnchorPane>
