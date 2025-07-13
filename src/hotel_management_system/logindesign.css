@@ -10,7 +10,7 @@
     -fx-border-width: 0.5px 0px 0.5px 0.5px;
 }
 
-.textfie {
+.textfile {
     -fx-background-color: transparent;
     -fx-border-color: #3395f1;
     -fx-border-width: 0px 0px 0.8px 0px;
@@ -19,7 +19,7 @@
     -fx-cursor: text;
 }
 
-.textfie:focused {
+.textfile:focused {
     -fx-border-color: linear-gradient(to bottom right, #2f3f89, #923165);
     -fx-border-width: 0px 0px 1.5px 0px;
 }
