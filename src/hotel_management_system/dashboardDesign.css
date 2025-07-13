@@ -20,7 +20,7 @@
     -fx-background-color: transparent;
     -fx-text-fill: white;
     -fx-font-size: 14px;
-    -fx-background-radius: 5;
+    -fx-background-radius: 15px;
     -fx-cursor: hand;
     -fx-alignment: CENTER_LEFT; /* aligns text to left */
     -fx-padding: 5 10 5 15;      /* top, right, bottom, left */
@@ -135,4 +135,34 @@
 }
 .check-in-btn:hover {
     -fx-background-color: #6ec1d6;
+}
+.table-view {
+    -fx-background-color: transparent;
+    -fx-padding: 0px;
+    -fx-border-color: linear-gradient(to bottom right, #2f3f89, #9231b5);
+    -fx-border-radius: 8px;
+}
+
+.table-view .column-header-background {
+    -fx-background-color: linear-gradient(to bottom right, #2f3f89, #9231b5);
+    -fx-background-insets: 0 0 0 0;
+}
+
+.table-view .column-header {
+    -fx-background-color: transparent;
+    -fx-pref-height: 50px;
+}
+
+.table-view .column-header .label {
+    -fx-text-fill: #fff;
+}
+.search {
+    -fx-background-color: transparent;
+    -fx-background-radius: 15px;
+    -fx-border-color: linear-gradient(to right, #2f3f89,#9231b5); /* Solid color only */
+    -fx-border-width: 1px;
+    -fx-border-radius: 5px 15px 5px 5px;
+}
+.search:focused{
+    -fx-border-width:1.8px;
 }
