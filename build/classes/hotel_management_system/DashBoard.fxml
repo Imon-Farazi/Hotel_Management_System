@@ -64,9 +64,9 @@
                                        </font>
                                     </Button>
                                     <Label layoutX="51.0" layoutY="509.0" text="Sin Out" textFill="WHITE" />
-                                    <Label layoutX="71.0" layoutY="71.0" prefHeight="70.0" prefWidth="57.0" text="👤" textFill="WHITE">
+                                    <Label layoutX="66.0" layoutY="69.0" prefHeight="90.0" prefWidth="63.0" text="👤" textFill="WHITE">
                                        <font>
-                                          <Font name="System Bold" size="57.0" />
+                                          <Font name="System Bold" size="62.0" />
                                        </font>
                                     </Label>
                                  </children>

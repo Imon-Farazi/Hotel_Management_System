@@ -2,7 +2,11 @@
 
 <?import java.lang.String?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.StackPane?>
@@ -64,9 +68,9 @@
                                              </font>
                                           </Button>
                                           <Label layoutX="51.0" layoutY="509.0" text="Sin Out" textFill="WHITE" />
-                                          <Label layoutX="69.0" layoutY="69.0" prefHeight="70.0" prefWidth="57.0" text="👤" textFill="WHITE">
+                                          <Label layoutX="66.0" layoutY="62.0" prefHeight="90.0" prefWidth="63.0" text="👤" textFill="WHITE">
                                              <font>
-                                                <Font name="System Bold" size="57.0" />
+                                                <Font name="System Bold" size="62.0" />
                                              </font>
                                           </Label>
                                        </children>
@@ -84,12 +88,83 @@
                                                 <String fx:value="white-bg" />
                                                 <String fx:value="shadow" />
                                              </styleClass>
+                                             <children>
+                                                <TextField layoutX="87.0" layoutY="81.0" prefHeight="28.0" prefWidth="165.0" styleClass="textfield" stylesheets="@dashboardDesign.css" />
+                                                <TextField layoutX="87.0" layoutY="205.0" prefHeight="28.0" prefWidth="165.0" styleClass="textfield" stylesheets="@dashboardDesign.css" />
+                                                <ComboBox layoutX="87.0" layoutY="123.0" prefHeight="28.0" prefWidth="165.0" styleClass="combo-box" stylesheets="@dashboardDesign.css" />
+                                                <ComboBox layoutX="87.0" layoutY="166.0" prefHeight="28.0" prefWidth="165.0" styleClass="combo-box" stylesheets="@dashboardDesign.css" />
+                                                <Label layoutX="70.0" layoutY="30.0" text="Customization">
+                                                   <font>
+                                                      <Font name="System Bold" size="19.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label layoutX="38.0" layoutY="172.0" text="Status :">
+                                                   <font>
+                                                      <Font name="System Bold" size="11.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label layoutX="13.0" layoutY="129.0" text="Room Type :">
+                                                   <font>
+                                                      <Font name="System Bold" size="11.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label layoutX="41.0" layoutY="88.0" text="Room :">
+                                                   <font>
+                                                      <Font name="System Bold" size="11.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label layoutX="45.0" layoutY="212.0" text="Price :">
+                                                   <font>
+                                                      <Font name="System Bold" size="11.0" />
+                                                   </font>
+                                                </Label>
+                                                <Button layoutX="34.0" layoutY="290.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="90.0" styleClass="add-btn" stylesheets="@dashboardDesign.css" text="ADD">
+                                                   <font>
+                                                      <Font name="System Bold" size="12.0" />
+                                                   </font>
+                                                </Button>
+                                                <Button layoutX="145.0" layoutY="349.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="90.0" styleClass="delete-btn" stylesheets="@dashboardDesign.css" text="DELETE">
+                                                   <font>
+                                                      <Font name="System Bold" size="12.0" />
+                                                   </font>
+                                                </Button>
+                                                <Button layoutX="34.0" layoutY="349.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="90.0" styleClass="clearbtn" stylesheets="@dashboardDesign.css" text="CLEAR">
+                                                   <font>
+                                                      <Font name="System Bold" size="12.0" />
+                                                   </font>
+                                                </Button>
+                                                <Button layoutX="146.0" layoutY="289.0" mnemonicParsing="false" prefHeight="41.0" prefWidth="90.0" styleClass="update-btn" stylesheets="@dashboardDesign.css" text="UPDATE">
+                                                   <font>
+                                                      <Font name="System Bold" size="12.0" />
+                                                   </font>
+                                                </Button>
+                                                <Button layoutX="35.0" layoutY="415.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="201.0" styleClass="check-in-btn" stylesheets="@dashboardDesign.css" text="CHECK-IN">
+                                                   <font>
+                                                      <Font name="System Bold" size="12.0" />
+                                                   </font>
+                                                </Button>
+                                             </children>
                                           </AnchorPane>
                                           <AnchorPane layoutX="297.0" layoutY="14.0" prefHeight="525.0" prefWidth="589.0" stylesheets="@dashboardDesign.css">
                                              <styleClass>
                                                 <String fx:value="white-bg" />
                                                 <String fx:value="shadow" />
                                              </styleClass>
+                                             <children>
+                                                <TableView layoutX="14.0" layoutY="51.0" prefHeight="461.0" prefWidth="561.0">
+                                                  <columns>
+                                                    <TableColumn prefWidth="118.00006103515625" text="ROOM" />
+                                                    <TableColumn prefWidth="170.0" text="ROOM TYPE" />
+                                                      <TableColumn prefWidth="142.6666259765625" text="STATUS" />
+                                                      <TableColumn prefWidth="128.0" text="PRICE PER NIGHT" />
+                                                  </columns>
+                                                </TableView>
+                                                <TextField layoutX="14.0" layoutY="14.0" prefHeight="25.0" prefWidth="192.0" promptText="⌕ Search">
+                                                   <font>
+                                                      <Font name="Tahoma Bold" size="12.0" />
+                                                   </font>
+                                                </TextField>
+                                             </children>
                                           </AnchorPane>
                                        </children>
                                     </AnchorPane>
