@@ -1,0 +1,56 @@
+/* Top header form style */
+.top-form {
+    -fx-background-color: #ffffff;
+    -fx-border-color: #000000;
+    -fx-border-width: .4px .4px .3px .4px;
+}
+.main-top-form {
+    -fx-background-color: #ddd;
+    -fx-border-color: #000000;
+    -fx-border-width: 0px 0px .4px 0px;
+}
+
+/* Navigation bar style with gradient */
+.nav-formi {
+    -fx-background-color: linear-gradient(to bottom right, #2f3f89, #9231b5);
+}
+
+/* Optional button style */
+.button-custom {
+    -fx-background-color: transparent;
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-background-radius: 5;
+    -fx-cursor: hand;
+    -fx-alignment: CENTER_LEFT; /* aligns text to left */
+    -fx-padding: 5 10 5 15;      /* top, right, bottom, left */
+}
+
+.button-custom:hover {
+    -fx-background-color: #1a2766;
+}
+
+/* Label styling */
+.label-title {
+    -fx-font-size: 18px;
+    -fx-text-fill: #333333;
+    -fx-font-weight: bold;
+}
+.close {
+    -fx-background-color: transparent;
+    -fx-cursor: hand;
+}
+
+.close:hover {
+    -fx-background-color: #fff2f2;
+}
+.white-bg{
+    -fx-background-color: #fff;
+    -fx-background-radius: 10px;
+}
+.shadow{
+    -fx-effect: dropshadow(three-pass-box,rgba(0,0,0,0.4),4,0,0,0);
+}
+.card{
+    -fx-background-color: linear-gradient(to right, #444857,#537e90);
+}

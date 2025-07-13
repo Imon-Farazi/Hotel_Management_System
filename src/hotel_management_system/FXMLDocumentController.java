@@ -5,9 +5,12 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ResourceBundle;
-import javafx.event.ActionEvent;
+
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
@@ -15,6 +18,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
+import javafx.stage.Stage;
 
 public class FXMLDocumentController implements Initializable {
 
@@ -40,40 +44,78 @@ public class FXMLDocumentController implements Initializable {
     private Connection connect;
     private PreparedStatement prepare;
     private ResultSet result;
-    public void login(){
+
+    @FXML
+    public void login() {
         String user = username.getText();
         String pass = password.getText();
-        String sql ="SELECT * FROM admin WHERE username ='"+user+"' and password = '"+pass+"'";
-        connect = Database.connectDb();
-        
-        try{
+
+        Alert alert;
+
+        // Validate input
+        if (user.isEmpty() || pass.isEmpty()) {
+            alert = new Alert(AlertType.ERROR);
+            alert.setTitle("Error Message");
+            alert.setHeaderText(null);
+            alert.setContentText("Please fill in all fields!");
+            alert.showAndWait();
+            return;
+        }
+
+        String sql = "SELECT * FROM admin WHERE username = ? AND password = ?";
+
+        try {
+            connect = Database.connectDb();
+
+            if (connect == null) {
+                throw new Exception("Database connection failed.");
+            }
+
             prepare = connect.prepareStatement(sql);
-            prepare.setString(1, user );
+            prepare.setString(1, user);
             prepare.setString(2, pass);
-            
             result = prepare.executeQuery();
-            
-            Alert alert;
-            
-            if(result.next()){
+
+            if (result.next()) {
                 alert = new Alert(AlertType.INFORMATION);
-                alert.setTitle("Information Message");
+                alert.setTitle("Login Successful");
                 alert.setHeaderText(null);
-                alert.setContentText("Successfully Login..!");
+                alert.setContentText("Welcome, " + user + "!");
                 alert.showAndWait();
-            }else{
+                loginbtn.getScene().getWindow().hide();
+                // Load Dashboard
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("DashBoard.fxml"));
+                Parent root = loader.load();
+                Stage stage = new Stage();
+                stage.setScene(new Scene(root));
+                stage.show();
+
+                // Close login window
+                ((Stage) loginbtn.getScene().getWindow()).close();
+            } else {
                 alert = new Alert(AlertType.ERROR);
-                alert.setTitle("Error Message");
+                alert.setTitle("Login Failed");
                 alert.setHeaderText(null);
-                alert.setContentText("Wrong Username/Password..!");
+                alert.setContentText("Incorrect username or password.");
                 alert.showAndWait();
             }
-        
-        }catch (Exception e){
+
+        } catch (Exception e) {
+            alert = new Alert(AlertType.ERROR);
+            alert.setTitle("Login Error");
+            alert.setHeaderText(null);
+            alert.setContentText("An error occurred: " + e.getMessage());
+            alert.showAndWait();
             e.printStackTrace();
+        } finally {
+            try {
+                if (result != null) result.close();
+                if (prepare != null) prepare.close();
+                if (connect != null) connect.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
-        
-        
     }
 
     @FXML
@@ -83,7 +125,6 @@ public class FXMLDocumentController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // Initialize DB connection
         connect = Database.connectDb();
     }
 }
