@@ -13,8 +13,7 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/20.0.1">
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hotel_management_system.RoomsController">
    <children>
       <AnchorPane id="AnchorPane" layoutX="10.0" layoutY="10.0" prefHeight="600.0" prefWidth="1100.0">
          <children>
@@ -28,7 +27,7 @@
                                  <children>
                                     <AnchorPane layoutX="41.0" layoutY="-75.0" prefHeight="50.0" prefWidth="1100.0" styleClass="top-form" stylesheets="@../../build/classes/hotel_management_system/logindesign.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                        <children>
-                                          <Button layoutX="623.0" layoutY="3.4" mnemonicParsing="false" prefHeight="25.0" prefWidth="39.0" styleClass="close" stylesheets="@logindesign.css" text="X" AnchorPane.rightAnchor="2.0" AnchorPane.topAnchor="3.0" />
+                                          <Button fx:id="exitBtn" layoutX="623.0" layoutY="3.4" mnemonicParsing="false" onAction="#handleExit" prefHeight="25.0" prefWidth="39.0" styleClass="close" stylesheets="@logindesign.css" text="⏻" AnchorPane.rightAnchor="2.0" AnchorPane.topAnchor="3.0" />
                                           <Button layoutX="1020.0" layoutY="1.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="37.0" styleClass="close" stylesheets="@dashboardDesign.css" text="✂" AnchorPane.rightAnchor="42.66666666666674" AnchorPane.topAnchor="2.0">
                                              <font>
                                                 <Font name="System Bold" size="12.0" />
@@ -68,7 +67,7 @@
                                              </font>
                                           </Button>
                                           <Label layoutX="51.0" layoutY="509.0" text="Sin Out" textFill="WHITE" />
-                                          <Label layoutX="66.0" layoutY="62.0" prefHeight="90.0" prefWidth="63.0" text="👤" textFill="WHITE">
+                                          <Label layoutX="66.0" layoutY="64.0" prefHeight="90.0" prefWidth="63.0" text="👤" textFill="WHITE">
                                              <font>
                                                 <Font name="System Bold" size="62.0" />
                                              </font>
@@ -159,7 +158,7 @@
                                                       <TableColumn prefWidth="128.0" text="PRICE PER NIGHT" />
                                                   </columns>
                                                 </TableView>
-                                                <TextField layoutX="14.0" layoutY="14.0" prefHeight="25.0" prefWidth="192.0" promptText="⌕ Search">
+                                                <TextField layoutX="14.0" layoutY="14.0" prefHeight="25.0" prefWidth="192.0" promptText="⌕  Search" styleClass="search" stylesheets="@dashboardDesign.css">
                                                    <font>
                                                       <Font name="Tahoma Bold" size="12.0" />
                                                    </font>

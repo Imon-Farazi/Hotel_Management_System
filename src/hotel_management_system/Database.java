@@ -11,7 +11,7 @@ public class Database {
             Class.forName("com.mysql.cj.jdbc.Driver");
 
             // Proper JDBC URL format
-            String url = "jdbc:mysql://localhost:3306/hoteldata";
+            String url = "jdbc:mysql://localhost:3306/hotel_data";
             String user = "root";
             String password = "";  // If no password
 
