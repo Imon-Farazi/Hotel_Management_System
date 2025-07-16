@@ -31,6 +31,7 @@ public class RoomsController implements Initializable {
 
     @FXML
     private void handleExit(ActionEvent event) {
+        System.exit(0);
     }
     
 }
