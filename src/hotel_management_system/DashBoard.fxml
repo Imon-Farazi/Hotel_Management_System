@@ -32,6 +32,16 @@
                                     </Button>
                                  </children>
                               </AnchorPane>
+                              <Label layoutX="12.0" layoutY="1.0" prefHeight="43.0" prefWidth="33.0" text="🏘">
+                                 <font>
+                                    <Font size="29.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="56.0" layoutY="12.0" text="Hotel Management System">
+                                 <font>
+                                    <Font size="19.0" />
+                                 </font>
+                              </Label>
                            </children>
                         </AnchorPane>
                      </top>
