@@ -75,13 +75,22 @@
                         </AnchorPane>
                      </left>
                      <center>
-                        <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                        <AnchorPane prefHeight="550.0" prefWidth="893.0" stylesheets="@dashboardDesign.css" BorderPane.alignment="CENTER">
                            <children>
-                              <TableView layoutX="8.0" layoutY="55.0" prefHeight="489.0" prefWidth="881.0">
+                              <TableView layoutX="8.0" layoutY="55.0" prefHeight="489.0" prefWidth="881.0" stylesheets="@dashboardDesign.css">
                                 <columns>
-                                  <TableColumn prefWidth="171.3333282470703" text="SL_NO" />
-                                  <TableColumn minWidth="3.3333740234375" prefWidth="177.99996948242188" text="Customer Name" />
+                                  <TableColumn prefWidth="96.0" text="Customer#" />
+                                  <TableColumn minWidth="3.3333740234375" prefWidth="115.99996948242188" text="First Name" />
+                                    <TableColumn minWidth="3.3333740234375" prefWidth="117.33331298828125" text="Last Name" />
+                                    <TableColumn minWidth="3.3333740234375" prefWidth="160.6666259765625" text="Phone Number" />
+                                    <TableColumn minWidth="3.3333740234375" prefWidth="96.66668701171875" text="Total Payment" />
+                                    <TableColumn minWidth="3.3333740234375" prefWidth="150.00006103515625" text="Checked-in" />
+                                    <TableColumn minWidth="3.3333740234375" prefWidth="141.99993896484375" text="Checked-Out" />
                                 </columns>
+                                 <styleClass>
+                                    <String fx:value="white-bg" />
+                                    <String fx:value="shadow" />
+                                 </styleClass>
                               </TableView>
                               <TextField layoutX="8.0" layoutY="14.0" prefHeight="25.0" prefWidth="212.0" promptText="⌕  Search" styleClass="search" stylesheets="@dashboardDesign.css">
                                  <font>
@@ -89,6 +98,10 @@
                                  </font>
                               </TextField>
                            </children>
+                           <styleClass>
+                              <String fx:value="white-bg" />
+                              <String fx:value="shadow" />
+                           </styleClass>
                         </AnchorPane>
                      </center>
                   </BorderPane>
