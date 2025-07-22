@@ -24,14 +24,24 @@
                            <children>
                               <AnchorPane layoutX="41.0" layoutY="-75.0" prefHeight="50.0" prefWidth="1100.0" styleClass="top-form" stylesheets="@../../build/classes/hotel_management_system/logindesign.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                  <children>
-                                    <Button fx:id="close" layoutX="623.0" layoutY="3.4" mnemonicParsing="false" onAction="#exit" prefHeight="25.0" prefWidth="39.0" styleClass="close" stylesheets="@logindesign.css" text="⏻" AnchorPane.rightAnchor="2.0" AnchorPane.topAnchor="2.0" />
-                                    <Button fx:id="minimize" layoutX="1020.0" layoutY="1.0" mnemonicParsing="false" onAction="#mini" prefHeight="25.0" prefWidth="37.0" styleClass="close" stylesheets="@dashboardDesign.css" text="✂" AnchorPane.rightAnchor="42.66666666666674" AnchorPane.topAnchor="2.0">
+                                    <Button fx:id="close" layoutX="623.0" layoutY="3.4" mnemonicParsing="false" onAction="#handelExit" prefHeight="25.0" prefWidth="39.0" styleClass="close" stylesheets="@logindesign.css" text="⏻" AnchorPane.rightAnchor="2.0" AnchorPane.topAnchor="2.0" />
+                                    <Button fx:id="minimize" layoutX="1020.0" layoutY="1.0" mnemonicParsing="false" onAction="#mini" prefHeight="25.0" prefWidth="37.0" styleClass="close" stylesheets="@dashboardDesign.css" text="—" AnchorPane.rightAnchor="42.66666666666674" AnchorPane.topAnchor="2.0">
                                        <font>
                                           <Font name="System Bold" size="12.0" />
                                        </font>
                                     </Button>
                                  </children>
                               </AnchorPane>
+                              <Label layoutX="12.0" layoutY="1.0" prefHeight="43.0" prefWidth="33.0" text="🏘">
+                                 <font>
+                                    <Font size="29.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="56.0" layoutY="12.0" text="Hotel Management System">
+                                 <font>
+                                    <Font size="19.0" />
+                                 </font>
+                              </Label>
                            </children>
                         </AnchorPane>
                      </top>
@@ -52,9 +62,9 @@
                                     </Label>
                                     <Line endX="100.0" layoutX="84.0" layoutY="200.0" startX="-67.83332061767578" startY="1.52587890625E-5" stroke="WHITE" strokeWidth="2.0" />
                                     <Button fx:id="avabtn" layoutX="14.0" layoutY="248.0" mnemonicParsing="false" onAction="#handAvaRoom" prefHeight="30.0" prefWidth="171.0" styleClass="button-custom" stylesheets="@dashboardDesign.css" text="Available Rooms" textAlignment="CENTER" wrapText="true" />
-                                    <Button layoutX="15.0" layoutY="217.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="171.0" styleClass="button-custom" stylesheets="@dashboardDesign.css" text="Dashboard" wrapText="true" />
-                                    <Button layoutX="14.0" layoutY="279.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="171.0" styleClass="button-custom" stylesheets="@dashboardDesign.css" text="Customer" textAlignment="CENTER" wrapText="true" />
-                                    <Button layoutX="9.0" layoutY="496.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="40.0" stylesheets="@dashboardDesign.css" text="➥">
+                                    <Button fx:id="dashboardBtn" layoutX="15.0" layoutY="217.0" mnemonicParsing="false" onAction="#openDashboard" prefHeight="30.0" prefWidth="171.0" styleClass="button-custom" stylesheets="@dashboardDesign.css" text="Dashboard" wrapText="true" />
+                                    <Button fx:id="customerBtn" layoutX="14.0" layoutY="279.0" mnemonicParsing="false" onAction="#openCustomer" prefHeight="30.0" prefWidth="171.0" styleClass="button-custom" stylesheets="@dashboardDesign.css" text="Customer" textAlignment="CENTER" wrapText="true" />
+                                    <Button fx:id="signOutBtn" layoutX="9.0" layoutY="496.0" mnemonicParsing="false" onAction="#signOut" prefHeight="44.0" prefWidth="40.0" stylesheets="@dashboardDesign.css" text="➥">
                                        <styleClass>
                                           <String fx:value="button-custom" />
                                           <String fx:value="button-custom" />
@@ -85,12 +95,12 @@
                                  <children>
                                     <AnchorPane layoutX="14.0" layoutY="11.0" prefHeight="127.0" prefWidth="275.0" style="-fx-background-radius: 5px;" stylesheets="@dashboardDesign.css">
                                        <children>
-                                          <Label layoutX="14.0" layoutY="29.0" text="✔" textFill="WHITE">
+                                          <Label layoutX="14.0" layoutY="11.0" text="✔" textFill="WHITE">
                                              <font>
                                                 <Font size="48.0" />
                                              </font>
                                           </Label>
-                                          <Label layoutX="62.0" layoutY="85.0" text="Today's Book" textFill="WHITE">
+                                          <Label layoutX="81.0" layoutY="81.0" text="Today's Book" textFill="WHITE">
                                              <font>
                                                 <Font name="System Bold" size="18.0" />
                                              </font>
@@ -108,19 +118,19 @@
                                     </AnchorPane>
                                     <AnchorPane layoutX="298.0" layoutY="11.0" prefHeight="127.0" prefWidth="276.0" style="-fx-background-radius: 5px;" stylesheets="@dashboardDesign.css">
                                        <children>
-                                          <Label layoutX="59.0" layoutY="85.0" text="Today's Income" textFill="WHITE">
+                                          <Label layoutX="71.0" layoutY="80.0" text="Today's Income" textFill="WHITE">
                                              <font>
                                                 <Font name="System Bold" size="18.0" />
-                                             </font>
-                                          </Label>
-                                          <Label layoutX="22.0" layoutY="17.0" prefHeight="75.0" prefWidth="37.0" text="৳" textFill="#fdfdfd">
-                                             <font>
-                                                <Font size="64.0" />
                                              </font>
                                           </Label>
                                           <Label layoutX="201.0" layoutY="14.0" text="0.0 TK" textFill="WHITE">
                                              <font>
                                                 <Font name="System Bold" size="24.0" />
+                                             </font>
+                                          </Label>
+                                          <Label layoutX="14.0" layoutY="7.0" prefHeight="75.0" prefWidth="65.0" style="-fx-background-radius: 10px;" text="💵" textFill="#fdfdfd">
+                                             <font>
+                                                <Font size="56.0" />
                                              </font>
                                           </Label>
                                        </children>
@@ -131,12 +141,7 @@
                                     </AnchorPane>
                                     <AnchorPane layoutX="582.0" layoutY="11.0" prefHeight="127.0" prefWidth="275.0" style="-fx-background-radius: 5px;" stylesheets="@dashboardDesign.css">
                                        <children>
-                                          <Label layoutX="22.0" layoutY="18.0" prefHeight="75.0" prefWidth="37.0" style="-fx-background-radius: 10px;" text="৳" textFill="#fdfdfd">
-                                             <font>
-                                                <Font size="64.0" />
-                                             </font>
-                                          </Label>
-                                          <Label layoutX="59.0" layoutY="83.0" text="Total Income" textFill="WHITE">
+                                          <Label layoutX="82.0" layoutY="80.0" text="Total Income" textFill="WHITE">
                                              <font>
                                                 <Font name="System Bold" size="18.0" />
                                              </font>
@@ -144,6 +149,11 @@
                                           <Label layoutX="190.0" layoutY="18.0" text="0.0 TK" textFill="WHITE">
                                              <font>
                                                 <Font name="System Bold" size="24.0" />
+                                             </font>
+                                          </Label>
+                                          <Label layoutX="14.0" layoutY="11.0" prefHeight="75.0" prefWidth="75.0" text="💰" textFill="#fdfdfd">
+                                             <font>
+                                                <Font size="56.0" />
                                              </font>
                                           </Label>
                                        </children>

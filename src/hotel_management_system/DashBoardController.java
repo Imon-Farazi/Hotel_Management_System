@@ -1,70 +1,86 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/javafx/FXMLController.java to edit this template
- */
 package hotel_management_system;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.stage.Stage;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import java.io.IOException;           // For IOException
-import javafx.scene.control.Alert;   // For Alert dialog
+import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
+import javafx.stage.Stage;
 
-
-/**
- * FXML Controller class
- *
- * @author I_Farazi-Ni
- */
 public class DashBoardController implements Initializable {
 
     @FXML
     private Button close;
+
     @FXML
     private Button minimize;
+
     @FXML
     private Button avabtn;
 
-    /**
-     * Initializes the controller class.
-     */
-    @Override
-    public void initialize(URL url, ResourceBundle rb) {
-        // TODO
-    }
+    @FXML
+    private Button dashboardBtn;
 
     @FXML
+    private Button customerBtn;
 
-    private void handAvaRoom(ActionEvent event) {
+    @FXML
+    private Button signOutBtn;
+
+    @Override
+    public void initialize(URL url, ResourceBundle rb) {
+        // Initialization if needed
+    }
+
+    // General method to open a new window and close current one
+    private void openNewWindow(String fxmlFile, Button btn) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("Rooms.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/hotel_management_system/" + fxmlFile));
             Parent root = loader.load();
+
             Stage stage = new Stage();
             stage.setScene(new Scene(root));
             stage.show();
-            
-            Stage handAvaRoomStage = (Stage) avabtn.getScene().getWindow();
-                handAvaRoomStage.close();
-            
+
+            // Close current window
+            Stage currentStage = (Stage) btn.getScene().getWindow();
+            currentStage.close();
+
         } catch (IOException e) {
             e.printStackTrace();
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Load Error");
-            alert.setHeaderText(null);
-            alert.setContentText("Failed to load Rooms.fxml: " + e.getMessage());
-            alert.showAndWait();
+            showErrorAlert("Failed to load " + fxmlFile, e.getMessage());
         }
     }
 
     @FXML
-    private void exit(ActionEvent event) {
+    private void handAvaRoom(ActionEvent event) {
+        openNewWindow("Rooms.fxml", avabtn);
+    }
+
+    @FXML
+    private void openDashboard(ActionEvent event) {
+        openNewWindow("DashBoard.fxml", dashboardBtn);
+    }
+
+    @FXML
+    private void openCustomer(ActionEvent event) {
+        openNewWindow("Customer.fxml", customerBtn);
+    }
+
+    @FXML
+    private void signOut(ActionEvent event) {
+        openNewWindow("FXMLDocument.fxml", signOutBtn);  // login page
+    }
+
+    @FXML
+    private void handelExit(ActionEvent event) {
         System.exit(0);
     }
 
@@ -74,4 +90,11 @@ public class DashBoardController implements Initializable {
         stage.setIconified(true);
     }
 
+    private void showErrorAlert(String header, String content) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Error");
+        alert.setHeaderText(header);
+        alert.setContentText(content);
+        alert.showAndWait();
+    }
 }
