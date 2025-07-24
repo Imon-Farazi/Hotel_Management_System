@@ -27,7 +27,7 @@
                                  <children>
                                     <AnchorPane layoutX="41.0" layoutY="-75.0" prefHeight="50.0" prefWidth="1100.0" styleClass="top-form" stylesheets="@../../build/classes/hotel_management_system/logindesign.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                        <children>
-                                          <Button fx:id="exitBtn" layoutX="623.0" layoutY="3.4" mnemonicParsing="false" onAction="#handleExit" prefHeight="25.0" prefWidth="39.0" styleClass="close" stylesheets="@logindesign.css" text="⏻" AnchorPane.rightAnchor="2.0" AnchorPane.topAnchor="3.0" />
+                                          <Button fx:id="exitBtn" layoutX="623.0" layoutY="3.4" mnemonicParsing="false" onAction="#handleExit" prefHeight="25.0" prefWidth="39.0" styleClass="close" stylesheets="@logindesign.css" text="X" AnchorPane.rightAnchor="2.0" AnchorPane.topAnchor="3.0" />
                                           <Button fx:id="miniBtn" layoutX="1020.0" layoutY="1.0" mnemonicParsing="false" onAction="#mini" prefHeight="25.0" prefWidth="37.0" styleClass="close" stylesheets="@dashboardDesign.css" text="—" AnchorPane.rightAnchor="42.66666666666674" AnchorPane.topAnchor="2.0">
                                              <font>
                                                 <Font name="System Bold" size="12.0" />
@@ -98,10 +98,10 @@
                                                 <String fx:value="shadow" />
                                              </styleClass>
                                              <children>
-                                                <TextField layoutX="87.0" layoutY="81.0" prefHeight="28.0" prefWidth="165.0" styleClass="textfield" stylesheets="@dashboardDesign.css" />
-                                                <TextField layoutX="87.0" layoutY="205.0" prefHeight="28.0" prefWidth="165.0" styleClass="textfield" stylesheets="@dashboardDesign.css" />
-                                                <ComboBox layoutX="87.0" layoutY="123.0" prefHeight="28.0" prefWidth="165.0" styleClass="combo-box" stylesheets="@dashboardDesign.css" />
-                                                <ComboBox layoutX="87.0" layoutY="166.0" prefHeight="28.0" prefWidth="165.0" styleClass="combo-box" stylesheets="@dashboardDesign.css" />
+                                                <TextField fx:id="roomNumberField" layoutX="87.0" layoutY="81.0" prefHeight="28.0" prefWidth="165.0" promptText="Room Number" styleClass="textfield" stylesheets="@dashboardDesign.css" />
+                                                <TextField fx:id="priceField" layoutX="87.0" layoutY="205.0" prefHeight="28.0" prefWidth="165.0" promptText="Price per Night" styleClass="textfield" stylesheets="@dashboardDesign.css" />
+                                                <ComboBox fx:id="roomTypeBox" layoutX="87.0" layoutY="123.0" prefHeight="28.0" prefWidth="165.0" promptText="Select" styleClass="combo-box" stylesheets="@dashboardDesign.css" />
+                                                <ComboBox fx:id="statusBox" layoutX="87.0" layoutY="166.0" prefHeight="28.0" prefWidth="165.0" promptText="Select" styleClass="combo-box" stylesheets="@dashboardDesign.css" />
                                                 <Label layoutX="70.0" layoutY="30.0" text="Customization">
                                                    <font>
                                                       <Font name="System Bold" size="19.0" />
@@ -127,27 +127,27 @@
                                                       <Font name="System Bold" size="11.0" />
                                                    </font>
                                                 </Label>
-                                                <Button layoutX="34.0" layoutY="290.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="90.0" styleClass="add-btn" stylesheets="@dashboardDesign.css" text="ADD">
+                                                <Button fx:id="addBtn" layoutX="34.0" layoutY="290.0" mnemonicParsing="false" onAction="#addRoom" prefHeight="40.0" prefWidth="90.0" styleClass="add-btn" stylesheets="@dashboardDesign.css" text="ADD">
                                                    <font>
                                                       <Font name="System Bold" size="12.0" />
                                                    </font>
                                                 </Button>
-                                                <Button layoutX="145.0" layoutY="349.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="90.0" styleClass="delete-btn" stylesheets="@dashboardDesign.css" text="DELETE">
+                                                <Button fx:id="delbtn" layoutX="145.0" layoutY="349.0" mnemonicParsing="false" onAction="#deleteRoom" prefHeight="40.0" prefWidth="90.0" styleClass="delete-btn" stylesheets="@dashboardDesign.css" text="DELETE">
                                                    <font>
                                                       <Font name="System Bold" size="12.0" />
                                                    </font>
                                                 </Button>
-                                                <Button layoutX="34.0" layoutY="349.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="90.0" styleClass="clearbtn" stylesheets="@dashboardDesign.css" text="CLEAR">
+                                                <Button fx:id="clbtn" layoutX="34.0" layoutY="349.0" mnemonicParsing="false" onAction="#clearFields" prefHeight="40.0" prefWidth="90.0" styleClass="clearbtn" stylesheets="@dashboardDesign.css" text="CLEAR">
                                                    <font>
                                                       <Font name="System Bold" size="12.0" />
                                                    </font>
                                                 </Button>
-                                                <Button layoutX="146.0" layoutY="289.0" mnemonicParsing="false" prefHeight="41.0" prefWidth="90.0" styleClass="update-btn" stylesheets="@dashboardDesign.css" text="UPDATE">
+                                                <Button fx:id="upbtn" layoutX="146.0" layoutY="289.0" mnemonicParsing="false" onAction="#updateRoom" prefHeight="41.0" prefWidth="90.0" styleClass="update-btn" stylesheets="@dashboardDesign.css" text="UPDATE">
                                                    <font>
                                                       <Font name="System Bold" size="12.0" />
                                                    </font>
                                                 </Button>
-                                                <Button layoutX="35.0" layoutY="415.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="201.0" styleClass="check-in-btn" stylesheets="@dashboardDesign.css" text="CHECK-IN">
+                                                <Button fx:id="checkbtn" layoutX="35.0" layoutY="415.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="201.0" styleClass="check-in-btn" stylesheets="@dashboardDesign.css" text="CHECK-IN">
                                                    <font>
                                                       <Font name="System Bold" size="12.0" />
                                                    </font>
@@ -160,15 +160,15 @@
                                                 <String fx:value="shadow" />
                                              </styleClass>
                                              <children>
-                                                <TableView layoutX="14.0" layoutY="51.0" prefHeight="461.0" prefWidth="561.0">
+                                                <TableView fx:id="roomTable" layoutX="14.0" layoutY="51.0" prefHeight="461.0" prefWidth="561.0">
                                                   <columns>
-                                                    <TableColumn prefWidth="118.00006103515625" text="ROOM" />
-                                                    <TableColumn prefWidth="170.0" text="ROOM TYPE" />
-                                                      <TableColumn prefWidth="142.6666259765625" text="STATUS" />
-                                                      <TableColumn prefWidth="128.0" text="PRICE PER NIGHT" />
+                                                    <TableColumn fx:id="roomNumberCol" prefWidth="118.00006103515625" text="ROOM" />
+                                                    <TableColumn fx:id="roomTypeCol" prefWidth="170.0" text="ROOM TYPE" />
+                                                      <TableColumn fx:id="roomStatusCol" prefWidth="142.6666259765625" text="STATUS" />
+                                                      <TableColumn fx:id="priceCol" prefWidth="128.0" text="PRICE PER NIGHT" />
                                                   </columns>
                                                 </TableView>
-                                                <TextField layoutX="14.0" layoutY="14.0" prefHeight="25.0" prefWidth="192.0" promptText="⌕  Search" styleClass="search" stylesheets="@dashboardDesign.css">
+                                                <TextField fx:id="searchIcon" layoutX="14.0" layoutY="14.0" prefHeight="25.0" prefWidth="192.0" promptText="⌕  Search" styleClass="search" stylesheets="@dashboardDesign.css">
                                                    <font>
                                                       <Font name="Tahoma Bold" size="12.0" />
                                                    </font>
