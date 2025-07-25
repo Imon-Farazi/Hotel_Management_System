@@ -330,6 +330,19 @@ public class RoomsController implements Initializable {
         alert.showAndWait();
     }
 
+    @FXML
+    private void checkin(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("form.fxml"));
+            Parent root = loader.load();
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace(); // You can also log this or show a dialog
+        }
+    }
+
     public static class Room {
 
         private final SimpleStringProperty roomNumber;
