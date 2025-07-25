@@ -32,6 +32,11 @@ public class FormController implements Initializable {
 
     @FXML
     private DatePicker checkin_date, checkout_date;
+    @FXML
+    private Label totalDays;
+    @FXML
+    private Label total;
+    private long stayDuration = 0;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -69,7 +74,7 @@ public class FormController implements Initializable {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("receipt.fxml"));
             AnchorPane pane = loader.load();
-
+            totalDays();
             ReceiptController controller = loader.getController();
             String receiptText = String.format("""
                 ------------ Receipt ------------
@@ -80,6 +85,7 @@ public class FormController implements Initializable {
                 Email       : %s
                 Check-In    : %s
                 Check-Out   : %s
+                Duration    : %d Day(s)
                                                
                                                
                                    Verifyed by 
@@ -93,7 +99,8 @@ public class FormController implements Initializable {
                     phone.getText(),
                     email.getText(),
                     checkin_date.getValue(),
-                    checkout_date.getValue()
+                    checkout_date.getValue(),
+                    stayDuration
             );
 
             controller.setReceiptText(receiptText);
@@ -141,6 +148,22 @@ public class FormController implements Initializable {
         } catch (SQLException e) {
             e.printStackTrace();
             showAlert("SQL Error", "Failed to insert data: " + e.getMessage());
+        }
+    }
+
+    public void totalDays() {
+        if (checkin_date.getValue() == null || checkout_date.getValue() == null) {
+            showAlert("Error", "Please select both check-in and check-out dates.");
+            return;
+        }
+
+        if (checkout_date.getValue().isBefore(checkin_date.getValue())) {
+            showAlert("Error", "Invalid Check-Out Date. It must be after Check-In Date.");
+            totalDays.setText("0 Day(s)");
+            stayDuration = 0;
+        } else {
+            stayDuration = java.time.temporal.ChronoUnit.DAYS.between(checkin_date.getValue(), checkout_date.getValue());
+            totalDays.setText(stayDuration + " Day(s)");
         }
     }
 

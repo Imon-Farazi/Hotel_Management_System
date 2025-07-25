@@ -32,19 +32,23 @@
          <String fx:value="white-bg" />
       </styleClass>
     </VBox>
-     <Button layoutX="179.0" layoutY="472.0" onAction="#printReceipt" prefHeight="36.0" prefWidth="74.0" styleClass="add-btn" stylesheets="@dashboardDesign.css" text="Print">
+     <Button layoutX="178.0" layoutY="479.0" onAction="#printReceipt" prefHeight="36.0" prefWidth="74.0" styleClass="add-btn" stylesheets="@dashboardDesign.css" text="Print">
       <font>
          <Font size="16.0" />
       </font>
    </Button>
-   <AnchorPane prefHeight="40.0" prefWidth="429.0" styleClass="top-form" stylesheets="@dashboardDesign.css">
+   <AnchorPane prefHeight="40.0" prefWidth="429.0" stylesheets="@dashboardDesign.css">
       <children>
-         <Label layoutX="156.0" layoutY="10.0" text="Customer Receipt" textFill="#7b2e76">
+         <Label layoutX="146.0" layoutY="5.0" prefHeight="30.0" prefWidth="138.0" text="Customer Receipt" textFill="#7b2e76">
             <font>
-               <Font name="Tahoma" size="15.0" />
+               <Font name="Gabriola" size="24.0" />
             </font>
          </Label>
       </children>
+      <styleClass>
+         <String fx:value="top-form" />
+         <String fx:value="top-form" />
+      </styleClass>
    </AnchorPane>
    <styleClass>
       <String fx:value="shadow" />
