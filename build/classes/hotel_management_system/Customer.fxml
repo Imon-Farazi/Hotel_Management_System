@@ -87,22 +87,22 @@
                      <center>
                         <AnchorPane prefHeight="550.0" prefWidth="893.0" stylesheets="@dashboardDesign.css" BorderPane.alignment="CENTER">
                            <children>
-                              <TableView layoutX="8.0" layoutY="55.0" prefHeight="489.0" prefWidth="881.0" stylesheets="@dashboardDesign.css">
+                              <TableView fx:id="table" layoutX="8.0" layoutY="55.0" prefHeight="489.0" prefWidth="881.0" stylesheets="@dashboardDesign.css">
                                 <columns>
-                                  <TableColumn prefWidth="96.0" text="Customer#" />
-                                  <TableColumn minWidth="3.3333740234375" prefWidth="115.99996948242188" text="First Name" />
-                                    <TableColumn minWidth="3.3333740234375" prefWidth="117.33331298828125" text="Last Name" />
-                                    <TableColumn minWidth="3.3333740234375" prefWidth="160.6666259765625" text="Phone Number" />
-                                    <TableColumn minWidth="3.3333740234375" prefWidth="96.66668701171875" text="Total Payment" />
-                                    <TableColumn minWidth="3.3333740234375" prefWidth="150.00006103515625" text="Checked-in" />
-                                    <TableColumn minWidth="3.3333740234375" prefWidth="141.99993896484375" text="Checked-Out" />
+                                  <TableColumn fx:id="id" prefWidth="96.0" text="Customer#" />
+                                  <TableColumn fx:id="firstName" minWidth="3.3333740234375" prefWidth="115.99996948242188" text="First Name" />
+                                    <TableColumn fx:id="lastName" minWidth="3.3333740234375" prefWidth="117.33331298828125" text="Last Name" />
+                                    <TableColumn fx:id="number" minWidth="3.3333740234375" prefWidth="160.6666259765625" text="Phone Number" />
+                                    <TableColumn fx:id="price" minWidth="3.3333740234375" prefWidth="96.66668701171875" text="Price" />
+                                    <TableColumn fx:id="checkin" minWidth="3.3333740234375" prefWidth="150.00006103515625" text="Check-in-Date" />
+                                    <TableColumn fx:id="checkout" minWidth="3.3333740234375" prefWidth="141.99993896484375" text="Check-Out-Date" />
                                 </columns>
                                  <styleClass>
                                     <String fx:value="white-bg" />
                                     <String fx:value="shadow" />
                                  </styleClass>
                               </TableView>
-                              <TextField layoutX="8.0" layoutY="14.0" prefHeight="25.0" prefWidth="212.0" promptText="⌕  Search" styleClass="search" stylesheets="@dashboardDesign.css">
+                              <TextField fx:id="search" layoutX="8.0" layoutY="14.0" prefHeight="25.0" prefWidth="212.0" promptText="⌕  Search" styleClass="search" stylesheets="@dashboardDesign.css">
                                  <font>
                                     <Font name="System Bold" size="12.0" />
                                  </font>

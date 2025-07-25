@@ -6,6 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
+import javafx.collections.FXCollections;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -34,13 +35,18 @@ public class FormController implements Initializable {
     private DatePicker checkin_date, checkout_date;
     @FXML
     private Label totalDays;
-    @FXML
-    private Label total;
     private long stayDuration = 0;
-
+    @FXML
+    private Label totalPrice;
+    @FXML
+    private ComboBox<String> roomType;
+    @FXML
+    private TextField price;
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         loadNextCustomerID();
+        roomType.setItems(FXCollections.observableArrayList("Single", "Double"));
+        
     }
 
     // Exit button
@@ -125,15 +131,17 @@ public class FormController implements Initializable {
             return;
         }
 
-        String sql = "INSERT INTO checkin (first_name, last_name, phone, email, checkin_date, checkout_date) VALUES (?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO checkin (first_name, last_name, phone, email,price,roomType, checkin_date, checkout_date) VALUES (?, ?, ?, ?, ?, ?,?,?)";
 
         try (PreparedStatement stmt = conn.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS)) {
             stmt.setString(1, firstName.getText());
             stmt.setString(2, lastName.getText());
             stmt.setString(3, phone.getText());
             stmt.setString(4, email.getText());
-            stmt.setDate(5, java.sql.Date.valueOf(checkin_date.getValue()));
-            stmt.setDate(6, java.sql.Date.valueOf(checkout_date.getValue()));
+            stmt.setString(5,price.getText() );
+            stmt.setString(6,roomType.getValue());
+            stmt.setDate(7, java.sql.Date.valueOf(checkin_date.getValue()));
+            stmt.setDate(8, java.sql.Date.valueOf(checkout_date.getValue()));
 
             int rowsInserted = stmt.executeUpdate();
             if (rowsInserted > 0) {

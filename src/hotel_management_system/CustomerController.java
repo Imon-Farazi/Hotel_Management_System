@@ -1,36 +1,96 @@
 package hotel_management_system;
 
-import java.io.IOException;
-import java.net.URL;
-import java.util.ResourceBundle;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
-import javafx.fxml.FXMLLoader;
+import javafx.fxml.*;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
+
+import java.io.IOException;
+import java.net.URL;
+import java.sql.*;
+import java.util.ResourceBundle;
 
 public class CustomerController implements Initializable {
 
     @FXML
-    private Button exitBtn;
+    private Button exitBtn, minimize, avaBtn, dbBtn, cusBtn, sinoutBtn;
     @FXML
-    private Button minimize;
+    private TableView<Customer> table;
     @FXML
-    private Button avaBtn;
+    private TableColumn<Customer, String> id, firstName, lastName, number, checkin, checkout;
     @FXML
-    private Button dbBtn;
+    private TableColumn<Customer, Double> price;
     @FXML
-    private Button cusBtn;
-    @FXML
-    private Button sinoutBtn;
+    private TextField search;
+
+    private final ObservableList<Customer> customerList = FXCollections.observableArrayList();
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // Optional: Initialization logic
+        // Set up columns
+        id.setCellValueFactory(new PropertyValueFactory<>("id"));
+        firstName.setCellValueFactory(new PropertyValueFactory<>("firstName"));
+        lastName.setCellValueFactory(new PropertyValueFactory<>("lastName"));
+        number.setCellValueFactory(new PropertyValueFactory<>("phoneNumber"));
+        price.setCellValueFactory(new PropertyValueFactory<>("price"));
+        checkin.setCellValueFactory(new PropertyValueFactory<>("checkIn"));
+        checkout.setCellValueFactory(new PropertyValueFactory<>("checkOut"));
+
+        loadCustomerData();
+
+        // Set up search functionality
+        FilteredList<Customer> filteredData = new FilteredList<>(customerList, p -> true);
+        search.textProperty().addListener((obs, oldVal, newVal) -> {
+            String lower = newVal.toLowerCase();
+            filteredData.setPredicate(c -> {
+                if (lower.isEmpty()) {
+                    return true;
+                }
+                return c.getFirstName().toLowerCase().contains(lower)
+                        || c.getLastName().toLowerCase().contains(lower)
+                        || c.getPhoneNumber().toLowerCase().contains(lower)
+                        || c.getCheckIn().toLowerCase().contains(lower)
+                        || c.getCheckOut().toLowerCase().contains(lower)
+                        || String.valueOf(c.getPrice()).contains(lower);
+            });
+        });
+
+        SortedList<Customer> sortedData = new SortedList<>(filteredData);
+        sortedData.comparatorProperty().bind(table.comparatorProperty());
+        table.setItems(sortedData);
+    }
+
+    private void loadCustomerData() {
+        customerList.clear();
+        String query = "SELECT * FROM checkin";
+
+        try (Connection conn = Database.connectDb(); PreparedStatement stmt = conn.prepareStatement(query); ResultSet rs = stmt.executeQuery()) {
+
+            while (rs.next()) {
+                String id = rs.getString("customer_id");
+                String firstName = rs.getString("first_name");
+                String lastName = rs.getString("last_name");
+                String phoneNumber = rs.getString("phone");
+                double price = rs.getDouble("price");
+                String checkIn = rs.getString("checkin_date");
+                String checkOut = rs.getString("checkout_date");
+
+                customerList.add(new Customer(id, firstName, lastName, phoneNumber, price, checkIn, checkOut));
+            }
+
+            table.setItems(customerList);
+
+        } catch (SQLException e) {
+            showAlert(Alert.AlertType.ERROR, "Database Error", "Failed to load customers: " + e.getMessage());
+        }
     }
 
     @FXML
@@ -46,65 +106,44 @@ public class CustomerController implements Initializable {
 
     @FXML
     private void openAva(ActionEvent event) {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("Rooms.fxml"));
-            Parent root = loader.load();
-            Stage stage = new Stage();
-            stage.setScene(new Scene(root));
-            stage.show();
-
-            Stage currentStage = (Stage) avaBtn.getScene().getWindow();
-            currentStage.close();
-
-        } catch (IOException e) {
-            showError("Rooms.fxml", e);
-        }
+        loadScene("Rooms.fxml", avaBtn);
     }
 
     @FXML
     private void openDb(ActionEvent event) {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("DashBoard.fxml"));
-            Parent root = loader.load();
-            Stage stage = new Stage();
-            stage.setScene(new Scene(root));
-            stage.show();
-
-            Stage currentStage = (Stage) dbBtn.getScene().getWindow();
-            currentStage.close();
-
-        } catch (IOException e) {
-            showError("DashBoard.fxml", e);
-        }
+        loadScene("DashBoard.fxml", dbBtn);
     }
 
     @FXML
     private void openCus(ActionEvent event) {
+        // Already on customer panel, do nothing or reload
+        loadCustomerData(); // optional refresh
     }
 
     @FXML
     private void sinout(ActionEvent event) {
+        loadScene("FXMLDocument.fxml", sinoutBtn);
+    }
+
+    private void loadScene(String fxmlFile, Button sourceBtn) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("FXMLDocument.fxml"));
-            Parent root = loader.load();
+            Parent root = FXMLLoader.load(getClass().getResource(fxmlFile));
             Stage stage = new Stage();
             stage.setScene(new Scene(root));
             stage.show();
 
-            Stage currentStage = (Stage) sinoutBtn.getScene().getWindow();
+            Stage currentStage = (Stage) sourceBtn.getScene().getWindow();
             currentStage.close();
-
         } catch (IOException e) {
-            showError("FXMLDocument.fxml", e);
+            showAlert(Alert.AlertType.ERROR, "Load Error", "Failed to load " + fxmlFile + ": " + e.getMessage());
         }
     }
 
-    private void showError(String file, IOException e) {
-        e.printStackTrace();
-        Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setTitle("Load Error");
+    private void showAlert(Alert.AlertType type, String title, String message) {
+        Alert alert = new Alert(type);
+        alert.setTitle(title);
         alert.setHeaderText(null);
-        alert.setContentText("Failed to load " + file + ": " + e.getMessage());
+        alert.setContentText(message);
         alert.showAndWait();
     }
 }
