@@ -15,7 +15,15 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import java.io.IOException;           // For IOException
+import javafx.scene.chart.AreaChart;
 import javafx.scene.control.Alert;   // For Alert dialog
+import javafx.scene.control.Label;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.time.LocalDate;
+
+import javafx.scene.chart.XYChart;
 
 /**
  * FXML Controller class
@@ -36,13 +44,23 @@ public class DashBoardController implements Initializable {
     private Button cusBtn;
     @FXML
     private Button logOutBtn;
+    @FXML
+    private Label bookingLvl;
+    @FXML
+    private Label incomeLvl;
+    @FXML
+    private Label t_income;
+    @FXML
+
+    private AreaChart<String, Number> incomedata;
 
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        loadDashboardStats();
+        loadIncomeChart();
     }
 
     @FXML
@@ -105,6 +123,30 @@ public class DashBoardController implements Initializable {
         }
     }
 
+    private void loadIncomeChart() {
+        String query = "SELECT checkin_date, SUM(price) AS daily_income FROM checkin GROUP BY checkin_date ORDER BY checkin_date";
+
+        try (Connection connect = Database.connectDb(); PreparedStatement stmt = connect.prepareStatement(query); ResultSet rs = stmt.executeQuery()) {
+
+            XYChart.Series<String, Number> series = new XYChart.Series<>();
+            series.setName("Daily Income");
+
+            while (rs.next()) {
+                String date = rs.getString("checkin_date");
+                double income = rs.getDouble("daily_income");
+
+                series.getData().add(new XYChart.Data<>(date, income));
+            }
+
+            incomedata.getData().clear();
+            incomedata.getData().add(series);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            showAlert("Chart Error", "Failed to load income chart: " + e.getMessage());
+        }
+    }
+
     @FXML
     private void logOut(ActionEvent event) {
         try {
@@ -113,10 +155,10 @@ public class DashBoardController implements Initializable {
             Stage stage = new Stage();
             stage.setScene(new Scene(root));
             stage.show();
-            
+
             Stage handAvaRoomStage = (Stage) avabtn.getScene().getWindow();
-                handAvaRoomStage.close();
-            
+            handAvaRoomStage.close();
+
         } catch (IOException e) {
             e.printStackTrace();
             Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -125,6 +167,64 @@ public class DashBoardController implements Initializable {
             alert.setContentText("Failed to Log Out" + e.getMessage());
             alert.showAndWait();
         }
+    }
+
+    private void loadDashboardStats() {
+        String today = java.time.LocalDate.now().toString(); // Format: YYYY-MM-DD
+
+        String todayIncomeQuery = "SELECT SUM(price) FROM checkin WHERE checkin_date = ?";
+        String todayBookingQuery = "SELECT COUNT(*) FROM checkin WHERE checkin_date = ?";
+        String totalIncomeQuery = "SELECT SUM(price) FROM checkin";
+
+        try (Connection connect = Database.connectDb()) {
+
+            // Today's Income
+            try (PreparedStatement stmt = connect.prepareStatement(todayIncomeQuery)) {
+                stmt.setString(1, today);
+                ResultSet rs = stmt.executeQuery();
+                if (rs.next()) {
+                    double income = rs.getDouble(1);
+                    incomeLvl.setText(String.format("%.2f", income));
+                } else {
+                    incomeLvl.setText("0.00");
+                }
+            }
+
+            // Today's Bookings
+            try (PreparedStatement stmt = connect.prepareStatement(todayBookingQuery)) {
+                stmt.setString(1, today);
+                ResultSet rs = stmt.executeQuery();
+                if (rs.next()) {
+                    int bookings = rs.getInt(1);
+                    bookingLvl.setText(String.valueOf(bookings));
+                } else {
+                    bookingLvl.setText("0");
+                }
+            }
+
+            // Total Income
+            try (PreparedStatement stmt = connect.prepareStatement(totalIncomeQuery)) {
+                ResultSet rs = stmt.executeQuery();
+                if (rs.next()) {
+                    double totalIncome = rs.getDouble(1);
+                    t_income.setText(String.format("%.2f", totalIncome));
+                } else {
+                    t_income.setText("0.00");
+                }
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            showAlert("Database Error", "Failed to load dashboard stats: " + e.getMessage());
+        }
+    }
+
+    private void showAlert(String title, String content) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(content);
+        alert.showAndWait();
     }
 
 }

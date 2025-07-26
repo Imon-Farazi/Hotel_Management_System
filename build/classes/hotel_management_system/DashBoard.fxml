@@ -105,7 +105,7 @@
                                                 <Font name="System Bold" size="18.0" />
                                              </font>
                                           </Label>
-                                          <Label layoutX="247.0" layoutY="11.0" text="0" textFill="WHITE">
+                                          <Label fx:id="bookingLvl" layoutX="184.0" layoutY="21.0" prefHeight="35.0" prefWidth="41.0" text="0" textAlignment="CENTER" textFill="WHITE">
                                              <font>
                                                 <Font name="System Bold" size="24.0" />
                                              </font>
@@ -123,7 +123,7 @@
                                                 <Font name="System Bold" size="18.0" />
                                              </font>
                                           </Label>
-                                          <Label layoutX="201.0" layoutY="14.0" text="0.0 TK" textFill="WHITE">
+                                          <Label fx:id="incomeLvl" contentDisplay="RIGHT" layoutX="94.0" layoutY="21.0" prefHeight="35.0" prefWidth="141.0" text="0.0 " textAlignment="RIGHT" textFill="WHITE">
                                              <font>
                                                 <Font name="System Bold" size="24.0" />
                                              </font>
@@ -131,6 +131,11 @@
                                           <Label layoutX="14.0" layoutY="7.0" prefHeight="75.0" prefWidth="65.0" style="-fx-background-radius: 10px;" text="💵" textFill="#fdfdfd">
                                              <font>
                                                 <Font size="56.0" />
+                                             </font>
+                                          </Label>
+                                          <Label layoutX="235.0" layoutY="21.0" text="Tk" textFill="WHITE">
+                                             <font>
+                                                <Font name="System Bold" size="24.0" />
                                              </font>
                                           </Label>
                                        </children>
@@ -146,14 +151,19 @@
                                                 <Font name="System Bold" size="18.0" />
                                              </font>
                                           </Label>
-                                          <Label layoutX="190.0" layoutY="18.0" text="0.0 TK" textFill="WHITE">
+                                          <Label fx:id="t_income" contentDisplay="RIGHT" layoutX="92.0" layoutY="23.0" prefHeight="35.0" prefWidth="138.0" text="0.0" textAlignment="RIGHT" textFill="WHITE">
                                              <font>
                                                 <Font name="System Bold" size="24.0" />
                                              </font>
                                           </Label>
-                                          <Label layoutX="14.0" layoutY="11.0" prefHeight="75.0" prefWidth="75.0" text="💰" textFill="#fdfdfd">
+                                          <Label contentDisplay="RIGHT" layoutX="14.0" layoutY="11.0" prefHeight="75.0" prefWidth="75.0" text="💰" textFill="#fdfdfd">
                                              <font>
                                                 <Font size="56.0" />
+                                             </font>
+                                          </Label>
+                                          <Label layoutX="233.0" layoutY="23.0" text="Tk" textFill="WHITE">
+                                             <font>
+                                                <Font name="System Bold" size="24.0" />
                                              </font>
                                           </Label>
                                        </children>
@@ -170,7 +180,7 @@
                                     <String fx:value="white-bg" />
                                  </styleClass>
                                  <children>
-                                    <AreaChart layoutX="15.0" layoutY="13.0" prefHeight="332.0" prefWidth="840.0" title="Income Data" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="13.0">
+                                    <AreaChart fx:id="incomedata" layoutX="15.0" layoutY="13.0" prefHeight="332.0" prefWidth="840.0" title="Income Data" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="13.0">
                                       <xAxis>
                                         <CategoryAxis side="BOTTOM" />
                                       </xAxis>
